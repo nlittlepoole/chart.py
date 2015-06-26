@@ -41,4 +41,9 @@ class LineChart():
         chart = chart + "\n" + "var myLineChart = new Chart(ctx).Line(data); \n </script>"
         return chart
 
+    def build_html(self):
+        html = '<html><head><title>Chart</title><script src= "http://www.chartjs.org/assets/Chart.js"></script> </head><body> %s' % self.build_chart()
+        html = html + '</body></html>'
+        return html
+
         
