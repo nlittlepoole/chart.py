@@ -1,8 +1,8 @@
-from line import LineChart
-from stacked import StackedChart
-import colors
+from chartspy import *
+from chartspy.colors import *
 import datetime
 import random
+
 
 numdays = 15
 base = datetime.datetime.today()
@@ -12,8 +12,8 @@ a = random.sample(xrange(100), numdays)
 b = random.sample(xrange(100), numdays)
 
 x = StackedChart(["Monday","Tuesday","Wednesday"])
-x.add_dimension("Line 1",a, options=colors.DEFAULT_GREEN)
-x.add_dimension("Line 2",b, options=colors.DEFAULT_RED)
-x.set_color("Line 2", colors.DEFAULT_RED )
+x.add_dimension("Line 1",a, options=DEFAULT_GREEN)
+x.add_dimension("Line 2",b, options=DEFAULT_RED)
+x.set_color("Line 2", DEFAULT_RED )
 print x.build_chart()
 print x.build_html()
