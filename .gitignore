@@ -1,0 +1,5 @@
+*.pyc
+build/
+dist/
+chart.py.egg-info/
+.git/
