@@ -18,7 +18,8 @@ class LineChart():
         self.set_color(name, colors.DEFAULT_BLUE)
 
         for key in options.keys():
-            if "color" in key:
+            print options[key]
+            if "color" in key and type(options[key]) == dict :
                 options[key] = colors.construct_color(options[key].get("color", (0,0,0)) , options[key].get("opacity", 1 ))
         self.y[name].update(options)
     def update_dimension(self, name, key, value):
@@ -27,7 +28,7 @@ class LineChart():
 
     def build_chart(self):
         data  = { "labels": self.x, "datasets" : []}
-        for dimension in self.y.keys():
+        for dimension in reversed(self.y.keys()):
             line = { 
                 "label": str(self.y[dimension].get('name')),
                 "fillColor": self.y[dimension].get("fill_color"),
