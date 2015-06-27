@@ -67,10 +67,10 @@ Feel free to make PRs!
 
 ### Todo's
 
-Write More Tests
-Pie and Bar Charts
-Data Filters
-Auto Chart Generator
+* Write More Tests
+* Pie and Bar Charts
+* Data Filters
+* Auto Chart Generator
 
 License
 ----
@@ -81,4 +81,15 @@ MIT
 **Free Software, Hell Yeah!**
 
 [Charts.js]:http://www.chartjs.org/
-
+[@thomasfuchs]:http://twitter.com/thomasfuchs
+[1]:http://daringfireball.net/projects/markdown/
+[marked]:https://github.com/chjj/marked
+[Ace Editor]:http://ace.ajax.org
+[node.js]:http://nodejs.org
+[Twitter Bootstrap]:http://twitter.github.com/bootstrap/
+[keymaster.js]:https://github.com/madrobby/keymaster
+[jQuery]:http://jquery.com
+[@tjholowaychuk]:http://twitter.com/tjholowaychuk
+[express]:http://expressjs.com
+[AngularJS]:http://angularjs.org
+[Gulp]:http://gulpjs.com
