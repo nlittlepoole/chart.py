@@ -5,10 +5,10 @@ import itertools
 from line import LineChart
 
 class StackedChart(LineChart):
-	def __init__(self, labels, width=450, height=450):
+	def __init__(self, labels, width=450, height=450, params={}):
 		self.top = None
 		self.opac = 1
-		LineChart.__init__(self,labels,width,height)
+		LineChart.__init__(self,labels,width,height,params)
 
 	def add_dimension(self, name ,lst, options={}):
 		mapped = []
@@ -23,3 +23,5 @@ class StackedChart(LineChart):
 		LineChart.add_dimension(self,name,mapped,options)
 		col = options.get("fill_color", "rgba(151,187,205,1)")
 		self.y[name]['fill_color'] = colors.construct_color(col, 1)
+		self.y[name]['stacked'] = 'true'
+		self.params.update( {'datasetFill' : 'true', 'animation' : True})
