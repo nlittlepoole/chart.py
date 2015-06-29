@@ -7,7 +7,7 @@ class LineChart():
     
     def __init__(self, labels, width=450, height=450, params={}):
         self.embed = ' <canvas id="myChart" width="%s" height="%s"></canvas><script>var ctx = document.getElementById("myChart").getContext("2d");' %(str(width), str(height)) 
-        
+        self.type = 'Line'
         if(width/len(labels) < 30) or params.get("nth"):
             temp = [""] * len(labels)
             nth = params.get("nth", int(math.ceil( 30.0/(width/len(labels)))))
@@ -63,7 +63,8 @@ class LineChart():
         js_data = json.dumps(data)
         var = "var data = %s" % js_data
         chart = self.embed + "\n" + var
-        chart = chart + "\n" + "var myLineChart = new Chart(ctx).Line(data, %s ); \n " % str(json.dumps(self.params))
+        print self.type
+        chart = chart + "\n" + "var myLineChart = new Chart(ctx).%s(data, %s ); \n " % ( self.type ,str(json.dumps(self.params)))
         func = """function change(name, stacked) {\n
                 var svg = document.getElementById(name);\n
                 myLineChart.datasets.forEach(function (dimension, index) {\n
