@@ -65,7 +65,7 @@ class LineChart():
         js_data = json.dumps(data)
         var = "var data = %s" % js_data
         chart = self.embed + "\n" + var
-        chart = chart + "\n" + "var myLineChart = new Chart(ctx).%s(data, %s ); \n " % ( self.type ,str(json.dumps(self.params))))
+        chart = chart + "\n" + "var myLineChart = new Chart(ctx).%s(data, %s ); \n " % ( self.type ,str(json.dumps(self.params)))
         func = """function change(name, stacked) {\n
                 var svg = document.getElementById(name);\n
                 myLineChart.datasets.forEach(function (dimension, index) {\n
