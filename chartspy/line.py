@@ -8,7 +8,7 @@ class LineChart():
     
     def __init__(self, labels, width=450, height=450, params={}):
         token = random.randint(1, 1000)
-        self.embed = ' <canvas id="myChart"%d width="%s" height="%s"></canvas><script>var ctx = document.getElementById("myChart%d").getContext("2d");' %(token, str(width), str(height),token) 
+        self.embed = ' <canvas id="myChart%d" width="%s" height="%s"></canvas><script>var ctx = document.getElementById("myChart%d").getContext("2d");' %(token, str(width), str(height),token) 
         self.type = 'Line'
         self.struct = 'points'
         if(width/len(labels) < 30) or params.get("nth"):
