@@ -8,6 +8,7 @@ class LineChart():
     def __init__(self, labels, width=450, height=450, params={}):
         self.embed = ' <canvas id="myChart" width="%s" height="%s"></canvas><script>var ctx = document.getElementById("myChart").getContext("2d");' %(str(width), str(height)) 
         self.type = 'Line'
+        self.struct = 'points'
         if(width/len(labels) < 30) or params.get("nth"):
             temp = [""] * len(labels)
             nth = params.get("nth", int(math.ceil( 30.0/(width/len(labels)))))
@@ -72,14 +73,14 @@ class LineChart():
                     if (dimension.label == name) {
                         if ('temp' in myLineChart.datasets[index] && myLineChart.datasets[index].temp.length > 0) {
 
-                            myLineChart.datasets[index].points = myLineChart.datasets[index].temp;
+                            myLineChart.datasets[index].[struct] = myLineChart.datasets[index].temp;
                             myLineChart.datasets[index].temp = [];
-                            svg.style.fill=myLineChart.datasets[index].pointColor;
+                            svg.style.fill=myLineChart.datasets[index].fillColor;
                             
                             if(stacked==true){
                                 for (i = 0; i < index; i++) { 
-                                   for (x = 0; x < myLineChart.datasets[index].points.length; x++) { 
-                                            myLineChart.datasets[i].points[x].value = myLineChart.datasets[i].points[x].value + myLineChart.datasets[index].points[x].value;
+                                   for (x = 0; x < myLineChart.datasets[index].[struct].length; x++) { 
+                                            myLineChart.datasets[i].[struct][x].value = myLineChart.datasets[i].[struct][x].value + myLineChart.datasets[index].[struct][x].value;
                                    }
                                 }
                             }
@@ -88,13 +89,13 @@ class LineChart():
 
                             if(stacked==true){
                                 for (i = 0; i < index; i++) { 
-                                   for (x = 0; x < myLineChart.datasets[index].points.length; x++) { 
-                                        myLineChart.datasets[i].points[x].value = myLineChart.datasets[i].points[x].value - myLineChart.datasets[index].points[x].value;
+                                   for (x = 0; x < myLineChart.datasets[index].[struct].length; x++) { 
+                                        myLineChart.datasets[i].[struct][x].value = myLineChart.datasets[i].[struct][x].value - myLineChart.datasets[index].[struct][x].value;
                                    }
                                 }
                             }
-                            myLineChart.datasets[index].temp = myLineChart.datasets[index].points;
-                            myLineChart.datasets[index].points = [];
+                            myLineChart.datasets[index].temp = myLineChart.datasets[index].[struct];
+                            myLineChart.datasets[index].[struct] = [];
                             svg.style.fill="white";
                         }
                         myLineChart.update();
@@ -104,7 +105,7 @@ class LineChart():
             }
             </script>\n
             <br> <h2>Legend:</h2>
-            """ 
+            """.replace("[struct]", self.struct) 
         toggle = ''
         for lin in reversed(data["datasets"]):
             toggle = toggle + """
@@ -113,7 +114,7 @@ class LineChart():
                           <circle  id="%s" cx="7" cy="10" r="5" stroke="%s" stroke-width="1" fill="%s" />
                         </svg>
                         <font style="cursor: pointer;" onclick="change('%s',%s)">%s</font>
-                    """ % ( lin['label'],lin['stacked'],lin['label'],lin['strokeColor'],lin['pointColor'],lin['label'],lin['stacked'],lin['label'])
+                    """ % ( lin['label'],lin['stacked'],lin['label'],lin['strokeColor'], lin['pointColor'] if self.type == 'Line' else lin['fillColor'] ,lin['label'],lin['stacked'],lin['label'])
         chart = chart + func + toggle
         return chart
     def build_html(self):
