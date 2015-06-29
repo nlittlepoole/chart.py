@@ -117,7 +117,7 @@ class LineChart():
                     """ % ( lin['label'],lin['stacked'],lin['label'],lin['strokeColor'], lin['pointColor'] if self.type == 'Line' else lin['fillColor'] ,lin['label'],lin['stacked'],lin['label'])
         token = random.randint(1, 10000)
         chart = chart + func + toggle
-        return chart.replace("myLineChart", "myLineChart%d" % token ).replace("ctx", "ctx%d" % token ).replace("kanvas", "kanvas%d" % token ).replace("myChart", "myChart%d" % token )
+        return chart.replace("myLineChart", "myLineChart%d" % token ).replace("ctx", "ctx%d" % token ).replace("kanvas", "kanvas%d" % token ).replace("myChart", "myChart%d" % token ).replace("change", "change" % token )
     def build_html(self):
         html = '<html>\n<head>\n<title>Chart</title>\n<script src= "http://www.chartjs.org/assets/Chart.js"></script> \n</head>\n<body>\n %s' % self.build_chart()
         html = html + '\n</body></html>'
