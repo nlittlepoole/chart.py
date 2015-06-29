@@ -7,7 +7,7 @@ import random
 class PieChart():
     
     def __init__(self, data, width=450, height=450, params={}):
-        self.embed = '<canvas id="myChart" width="%s" height="%s"></canvas><script>var canv= document.getElementById("myChart"); \n var ctx = canv.getContext("2d");' %( str(width), str(height) ) 
+        self.embed = '<canvas id="myChart" width="%s" height="%s"></canvas><script>var kanvas= document.getElementById("myChart"); \n var ctx = kanvas.getContext("2d");' %( str(width), str(height) ) 
         self.type = 'Pie'
         self.struct = 'points'
 
@@ -49,7 +49,7 @@ class PieChart():
                     myLineChart.update()
                 }
 
-            canv.onclick = function(evt){
+            kanvas.onclick = function(evt){
                 var tag  = myLineChart.getSegmentsAtEvent(evt)[0].label;
                 for (i = 0; i < myLineChart.segments.length; i++) { 
                     if(tag == myLineChart.segments[i].label){
@@ -73,7 +73,7 @@ class PieChart():
             i = i +1
         chart = chart + func + toggle
         token = random.randint(1, 10000)
-        return chart.replace("myLineChart", "myLineChart%d" % token ).replace("ctx", "ctx%d" % token ).replace("canv", "canv%d" % token ).replace("myChart", "myChart%d" % token )
+        return chart.replace("myLineChart", "myLineChart%d" % token ).replace("ctx", "ctx%d" % token ).replace("kanvas", "kanvas%d" % token ).replace("myChart", "myChart%d" % token )
     def build_html(self):
         html = '<html>\n<head>\n<title>Chart</title>\n<script src= "http://www.chartjs.org/assets/Chart.js"></script> \n</head>\n<body>\n %s' % self.build_chart()
         html = html + '\n</body></html>'
