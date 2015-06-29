@@ -14,5 +14,7 @@ x = BarChart(date_list)
 x.add_dimension("Line 1",a, options=DEFAULT_GREEN)
 x.add_dimension("Line 2",b)
 x.set_color("Line 2", DEFAULT_RED )
+
+x = DoughnutChart([{"label": "test", "value":300}, {"label": "test2", "value":100},{"label": "test3", "value":200}  ])
 #print x.build_chart()
 print x.build_html()
