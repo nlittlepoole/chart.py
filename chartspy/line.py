@@ -27,9 +27,8 @@ class LineChart():
 
         self.x = labels
         self.y = {}
-        self.params = {'datasetFill' : False, 'animation' : True, 'pointDot' : False}
-        self.params.update(params)
-
+        self.params = params
+        self.params.update({'datasetFill' : False, 'animation' : True, 'pointDot' : False})
 
     def set_color(self,dimension, color_scheme):
         self.y[dimension].update(color_scheme)
