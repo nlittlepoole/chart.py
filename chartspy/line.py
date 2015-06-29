@@ -7,7 +7,7 @@ import random
 class LineChart():
     
     def __init__(self, labels, width=450, height=450, params={}):
-        self.embed = '<canvas id="myChart" width="%s" height="%s"></canvas><script>var canvas= document.getElementById("myChart"); \n var ctx = canvas.getContext("2d");' %( str(width), str(height) ) 
+        self.embed = '<canvas id="myChart" width="%s" height="%s"></canvas><script>var canv= document.getElementById("myChart"); \n var ctx = canv.getContext("2d");' %( str(width), str(height) ) 
         self.type = 'Line'
         self.struct = 'points'
         if(width/len(labels) < 30) or params.get("nth"):
@@ -117,7 +117,7 @@ class LineChart():
                     """ % ( lin['label'],lin['stacked'],lin['label'],lin['strokeColor'], lin['pointColor'] if self.type == 'Line' else lin['fillColor'] ,lin['label'],lin['stacked'],lin['label'])
         token = random.randint(1, 10000)
         chart = chart + func + toggle
-        return chart.replace("myLineChart", "myLineChart%d" % token ).replace("ctx", "ctx%d" % token ).replace("canvas", "canvas%d" % token ).replace("myChart", "myChart%d" % token )
+        return chart.replace("myLineChart", "myLineChart%d" % token ).replace("ctx", "ctx%d" % token ).replace("canv", "canv%d" % token ).replace("myChart", "myChart%d" % token )
     def build_html(self):
         html = '<html>\n<head>\n<title>Chart</title>\n<script src= "http://www.chartjs.org/assets/Chart.js"></script> \n</head>\n<body>\n %s' % self.build_chart()
         html = html + '\n</body></html>'
