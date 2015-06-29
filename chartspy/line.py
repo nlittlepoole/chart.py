@@ -7,8 +7,7 @@ import random
 class LineChart():
     
     def __init__(self, labels, width=450, height=450, params={}):
-        token = random.randint(1, 1000)
-        self.embed = ' <canvas id="myChart%d" width="%s" height="%s"></canvas><script>var ctx = document.getElementById("myChart%d").getContext("2d");' %(token, str(width), str(height),token) 
+        self.embed = '<canvas id="myChart" width="%s" height="%s"></canvas><script>var canvas= document.getElementById("myChart"); \n var ctx = canvas.getContext("2d");' %( str(width), str(height) ) 
         self.type = 'Line'
         self.struct = 'points'
         if(width/len(labels) < 30) or params.get("nth"):
@@ -66,7 +65,7 @@ class LineChart():
         js_data = json.dumps(data)
         var = "var data = %s" % js_data
         chart = self.embed + "\n" + var
-        chart = chart + "\n" + "var myLineChart = new Chart(ctx).%s(data, %s ); \n " % ( self.type ,str(json.dumps(self.params)))
+        chart = chart + "\n" + ("var myLineChart = new Chart(ctx).%s(data, %s ); \n " % ( self.type ,str(json.dumps(self.params)))).replace("myLineChart", "myLineChart%d" % token ).replace("ctx", "ctx%d" % token ).replace("canvas", "canvas%d" % token )
         func = """function change(name, stacked) {\n
                 var svg = document.getElementById(name);\n
                 myLineChart.datasets.forEach(function (dimension, index) {\n
@@ -106,7 +105,7 @@ class LineChart():
             }
             </script>\n
             <br> <h2>Legend:</h2>
-            """.replace("[struct]", self.struct) 
+            """.replace("[struct]", self.struct)
         toggle = ''
         for lin in reversed(data["datasets"]):
             toggle = toggle + """
@@ -116,8 +115,9 @@ class LineChart():
                         </svg>
                         <font style="cursor: pointer;" onclick="change('%s',%s)">%s</font>
                     """ % ( lin['label'],lin['stacked'],lin['label'],lin['strokeColor'], lin['pointColor'] if self.type == 'Line' else lin['fillColor'] ,lin['label'],lin['stacked'],lin['label'])
+        token = random.randint(1, 10000)
         chart = chart + func + toggle
-        return chart
+        return chart.replace("myLineChart", "myLineChart%d" % token ).replace("ctx", "ctx%d" % token ).replace("canvas", "canvas%d" % token ).replace("myChart", "myChart%d" % token )
     def build_html(self):
         html = '<html>\n<head>\n<title>Chart</title>\n<script src= "http://www.chartjs.org/assets/Chart.js"></script> \n</head>\n<body>\n %s' % self.build_chart()
         html = html + '\n</body></html>'

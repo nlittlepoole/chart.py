@@ -7,8 +7,7 @@ import random
 class PieChart():
     
     def __init__(self, data, width=450, height=450, params={}):
-        token = random.randint(1, 1000)
-        self.embed = ' <canvas id="myChart%d" width="%s" height="%s"></canvas><script>var canvas= document.getElementById("myChart%d"); \n var ctx = canvas.getContext("2d");' %(token, str(width), str(height) , token) 
+        self.embed = '<canvas id="myChart" width="%s" height="%s"></canvas><script>var canvas= document.getElementById("myChart"); \n var ctx = canvas.getContext("2d");' %( str(width), str(height) ) 
         self.type = 'Pie'
         self.struct = 'points'
 
@@ -60,7 +59,7 @@ class PieChart():
             }
             </script>\n
             <br> <h2>Legend:</h2>
-            """.replace("[struct]", self.struct) 
+            """.replace("[struct]", self.struct)
         toggle = ''
         i = 0
         for lin in self.data:
@@ -73,7 +72,8 @@ class PieChart():
                     """ % ( lin['label'],i,lin['label'],lin['highlight'], lin['color'] ,lin['label'], i,lin['label'])
             i = i +1
         chart = chart + func + toggle
-        return chart
+        token = random.randint(1, 10000)
+        return chart.replace("myLineChart", "myLineChart%d" % token ).replace("ctx", "ctx%d" % token ).replace("canvas", "canvas%d" % token ).replace("myChart", "myChart%d" % token )
     def build_html(self):
         html = '<html>\n<head>\n<title>Chart</title>\n<script src= "http://www.chartjs.org/assets/Chart.js"></script> \n</head>\n<body>\n %s' % self.build_chart()
         html = html + '\n</body></html>'
