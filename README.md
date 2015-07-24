@@ -6,8 +6,7 @@ Chart py is a python charting library based on the open source Chart.js
 > Charts.py exists to make inserting charts into python projects as simple as possible.
 > The syntax for this wrapper is constructed to be as simple to use as possible. 
 
-
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
+Check out the [Demo] ipython notebook!
 
 ### Version
 0.1.01
@@ -79,4 +78,4 @@ MIT
 **Free Software, Hell Yeah!**
 
 [Charts.js]:http://www.chartjs.org/
-
+[Demo]: http://nbviewer.ipython.org/github/nlittlepoole/chart.py/blob/master/chartspy/demo.ipynb
